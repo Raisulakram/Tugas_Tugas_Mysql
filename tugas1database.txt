@@ -1,0 +1,37 @@
+*Kumpulan query MySQL*
+//memasuki mariaDB ke dalam CMD
+cd \xampp\mysql\bin
+
+//membuat database baru
+CREATE DATABASES dbpegawai;
+
+//menampilkan database
+SHOW DATABASES;
+
+//masuk ke ruang database
+use dbpegawai;
+
+//menampilkan tabel yang sudah ada di dalam dbpegawai
+SHOW TABLES FROM dbpegawai;
+
+//membuat tabel di dalam dbpegawai
+CREATE TABLE pegawai (
+    id INT PRIMARY KEY,
+    nip CHAR(5) NOT NULL UNIQUE,
+    nama VARCHAR(30) NOT NULL,
+    gender ENUM('L', 'P') NOT NULL,
+    umur INT NOT NULL,
+    berat_badan FLOAT
+);
+
+//menginput data ke dalam tabel
+INSERT INTO `pegawai` (`id`, `nip`, `nama`, `gender`, `umur`, `berat_badan`) 
+VALUES 
+('3', '0014', 'Lisa', 'P', '19', '56');
+
+//menampilkan data pegawai
+SELECT * FROM pegawai;
+
+//melihat deskripsi tabel pegawai
+DESC pegawai;
+
