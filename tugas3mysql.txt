@@ -1,0 +1,88 @@
+//tambahkan tabel pembelian
+CREATE TABLE Pembelian (
+    id_pembelian INT PRIMARY KEY AUTO_INCREMENT,
+    id_produk INT,
+    id_vendor INT,
+    tanggal_pembelian DATE,
+    jumlah INT NOT NULL,
+    harga DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_produk) REFERENCES Produk(id_produk),
+    FOREIGN KEY (id_vendor) REFERENCES Vendor(id_vendor)
+);
+
+//menambahkan tabel Vendor
+CREATE TABLE Vendor (
+    id_vendor INT PRIMARY KEY AUTO_INCREMENT,
+    nama_vendor VARCHAR(255) NOT NULL,
+    alamat VARCHAR(255),
+    telepon VARCHAR(15)
+);
+
+//menambahkan 5 data ke dalam tabel produk
+INSERT INTO Produk (id, kode, nama, harga_beli, harga_jual, stok, min_stok, jenis_produk_id) 
+VALUES
+(6, 'k006', 'Laptop', 800.00, 1000.00, 10, 5, 1),
+(7, 'k007', 'Smartphone', 300.00, 400.00, 15, 5, 2),
+(8, 'k008', 'Tablet', 250.00, 350.00, 8, 3, 2),
+(9, 'k009', 'Printer', 150.00, 200.00, 12, 6, 3),
+(10, 'k0010', 'Mouse', 10.00, 15.00, 50, 20, 4);
+
+//menampilkan data produk yang stoknya 3 dan 10
+SELECT * from produk WHERE stok=3 OR stok=10;
+
+//menampilkan data produk yang harga jualnya kurang dari 5 juta tetapi lebih dari 500 ribu
+SELECT * FROM produk WHERE harga_jual < 5000000 AND harga_jual > 500000;
+
+//menampilkan data produk yang harus segera ditambah stoknya
+SELECT * FROM produk WHERE min_stok > stok;
+
+//menampilkan data pelanggan mulai dari yang paling muda
+SELECT * FROM pelanggan ORDER BY tgl_lahir DESC;
+
+//menampilkan data pelanggan yang lahirnya di Jakarta dan gendernya perempuan
+SELECT * FROM pelanggan WHERE tmp_lahir='jakarta' AND jk='P';
+
+//menampilkan data pelanggan yang ID nya 2, 4 dan 6
+SELECT * from pelanggan WHERE id IN (2,4,6);
+
+//menampilkan data produk yang harganya antara 500 ribu sampai 6 juta
+SELECT * FROM produk WHERE harga_jual >= 500000 AND harga_jual<= 6000000;
+
+//menampilkan produk yang kode awalnya huruf K dan huruf M
+SELECT * FROM produk WHERE kode LIKE 'K%' OR kode LIKE 'M%';
+
+//menampilkan produk yang kode awalnya bukan huruf M
+SELECT * FROM produk WHERE kode NOT LIKE 'M%';
+
+//menampilkan produk-produk televisi
+SELECT * FROM produk WHERE nama = 'TElevisi';
+
+//menampilkan pelanggan mengandung huruf 'SA'
+SELECT * FROM pelanggan WHERE nama LIKE '%SA%';
+
+//menampilkan pelanggan yang lahirnya bukan di Jakarta dan mengandung huruf ‘yo‘
+SELECT * FROM pelanggan WHERE tmp_lahir != 'Jakarta' AND nama LIKE '%yo%';
+
+//menampilkan pelanggan yang karakter huruf ke – 2 nya adalah A
+SELECT * FROM pelanggan WHERE SUBSTRING(nama, 2, 1) = 'A';
+
+//menammpilkan 2 data produk termahal
+SELECT *FROM produk ORDER BY harga_beli DESC LIMIT 2;
+
+
+//menammpilkan produk yang paling murah
+SELECT * FROM produk ORDER BY harga_beli ASC LIMIT 1;
+
+//menammpilkan produk yang stoknya paling banyak
+SELECT * FROM produk ORDER BY stok DESC LIMIT 2;
+
+//menammpilkan dua produk yang stoknya paling sedikit
+SELECT * FROM produk ORDER BY stok ASC LIMIT 2;
+
+//menammpilkan pelanggan yang paling muda
+SELECT * FROM pelanggan ORDER BY tgl_lahir ASC LIMIT 1;
+
+//menammpilkan pelanggan yang paling tua
+SELECT * FROM pelanggan ORDER BY tgl_lahir DESC LIMIT 1;
+
+
